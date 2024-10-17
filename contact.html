@@ -1,1 +1,1002 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <script src="https://kit.fontawesome.com/eb53a072fa.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+      /* Basic styling for the dropdown */
+.profile-dropdown {
+    position: relative;
+}
+
+.profile-dropdown-list {
+    display: none; /* Hide by default */
+    position: absolute;
+    right: 0;
+    background-color: white;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    z-index: 1; /* Ensure dropdown is above other elements */
+}
+
+.profile-dropdown-list.show {
+    display: block; /* Show when toggled */
+}
+
+.profile-dropdown-list-item a {
+    padding: 10px 20px;
+    display: block;
+    color: black;
+    text-decoration: none;
+}
+
+.profile-dropdown-list-item a:hover {
+    background-color: #f1f1f1; /* Highlight on hover */
+}
+
+/* Ensure the profile dropdown button is styled properly */
+.profile-dropdown-btn {
+    cursor: pointer; /* Change cursor on hover */
+    display: flex; /* Align items horizontally */
+    align-items: center;
+}
+
+     
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #d2d2da;
+        }
+
+        /* Header styling */
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #ffffff; /* Clean white background */
+            border-bottom: 4px solid #4CAF50; /* Green accent */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Softer shadow for depth */
+        }
+
+        /* Logo styling */
+        .logo img, .logo2 img {
+            width: 120px; /* Equal sizing for logos */
+            height: 120px;
+            object-fit: contain;
+            border-radius: 10px; /* Smooth edges for logos */
+        }
+
+        /* Details section styling */
+        .details {
+            text-align: center;
+            font-family: 'Poppins', sans-serif; /* Clean, modern font */
+            color: #555; /* Grey tone for text */
+        }
+
+        .details h1 {
+            font-size: 36px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #4CAF50, #FF9800); /* Gradient */
+            -webkit-background-clip: text; /* Clip background to text */
+            -webkit-text-fill-color: transparent; /* Fill color transparent for gradient */
+            margin: 0;
+            letter-spacing: 2px; /* Spacious lettering */
+            text-transform: uppercase;
+            animation: text-flicker 1.5s infinite alternate; /* Flickering animation */
+        }
+
+        .details h3 {
+            font-size: 22px;
+            font-weight: 600;
+            color: #FF4081; /* Pink color for subtitle */
+            margin: 10px 0;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+        }
+
+        .details p {
+            font-size: 16px;
+            color: #777777; /* Softer grey */
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 10px auto;
+            transition: color 0.5s ease; /* Smooth color transition on hover */
+        }
+
+        .details p:hover {
+            color: #FF9800; /* Change to orange on hover */
+        }
+
+        /* Animation keyframes */
+        @keyframes text-flicker {
+            0% { opacity: 1; }
+            100% { opacity: 0.8; }
+        }
+
+/* Responsive adjustments for smaller screens */
+
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .details h1 {
+                font-size: 28px;
+            }
+
+            .details h3 {
+                font-size: 18px;
+            }
+
+            .details p {
+                font-size: 14px;
+            }
+
+            .logo2 img {
+                margin-top: 15px;
+            }
+
+          
+        }
+
+
+        
+        /* General Navbar Styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #012b6b; /* Dark professional background */
+            padding: 15px 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* Navbar links */
+        #nav-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: #f5f5f5; /* Light color for contrast */
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 18px;
+            font-weight: 500;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Hover effect for links */
+        .navbar a:hover {
+            background-color: #f5f5f5;
+            color: #1c1e21; /* Dark text on hover */
+        }
+
+        /* Toggle button for small screens */
+        .toggle-btn {
+            font-size: 25px; /* Increase size of both hamburger and X icon */
+            color: #f5f5f5;
+            cursor: pointer;
+            display: none; /* Hidden by default */
+        }
+
+        
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            #nav-links {
+                display: none; /* Hide links by default */
+                flex-direction: column;
+                width: 100%;
+                background-color: #012b6b; /* Match navbar background */
+                position: absolute;
+                top: 60px; /* Adjust based on navbar height */
+                left: 0;
+                z-index: 999;
+            }
+
+            .navbar a {
+                padding: 15px 0;
+                width: 100%;
+                text-align: center;
+                margin: 0;
+                border-bottom: 1px solid #333;
+            }
+
+            .toggle-btn {
+                display: block; /* Show toggle button on small screens */
+            }
+        }
+
+        /* Large screen adjustments */
+        @media (min-width: 769px) {
+            .toggle-btn {
+                display: none; /* Hide toggle button on large screens */
+            }
+
+            #nav-links {
+                display: flex; /* Show links on large screens */
+                flex-direction: row;
+            }
+        }
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap");
+    :root {
+  --primary: #eeeeee;
+  --secondary: #227c70;
+  --green: #7fa1b1;
+  --secondary-light: rgb(1, 43, 107);
+  --secondary-light-2: rgb(127, 183, 126, 0.1);
+  --secondary-light-3: rgba(179, 195, 178, 0.177);
+  --white: #fff;
+  --black: #393e46;
+
+  --shadow: 0px 2px 8px 0px var(--secondary-light);
+}
+
+    .profile-dropdown {
+  position: relative;
+  width: fit-content;
+}
+
+.profile-dropdown-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  width: 100%;
+  border-radius: 50px;
+  color: var(--white);
+  /* background-color: white;
+  box-shadow: var(--shadow); */
+
+  cursor: pointer;
+  border: 1px solid var(--secondary);
+  transition: box-shadow 0.2s ease-in, background-color 0.2s ease-in,
+    border 0.3s;
+}
+
+.profile-dropdown-btn:hover {
+  background-color: var(--secondary-light-3);
+  box-shadow: var(--shadow);
+}
+
+.profile-img {
+  position: relative;
+  width: 2.3rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: url("");
+  background-size: cover;
+  display: flex;
+    align-items: center;
+ 
+}
+
+.profile-img i {
+  position: absolute;
+  right: 0;
+  
+  font-size: 1.9rem;
+  color: var(--green);
+}
+
+.profile-dropdown-btn span {
+  margin: 0 0.5rem;
+  margin-right: 0;
+  display: flex;
+    gap: 9px;
+}
+
+.profile-dropdown-list {
+  position: absolute;
+  top: 68px;
+  width: 220px;
+  right: 0;
+  background-color: var(--white);
+  border-radius: 10px;
+  max-height: 0;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: max-height 0.5s;
+}
+
+.profile-dropdown-list hr {
+  border: 0.5px solid var(--green);
+}
+
+.profile-dropdown-list.active {
+  max-height: 500px;
+}
+
+.profile-dropdown-list-item {
+  padding: 0.5rem 0.6rem 0.5rem 0.6rem;
+  transition: background-color 0.2s ease-in, padding-left 0.2s;
+}
+
+.profile-dropdown-list-item a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--black);
+}
+
+.profile-dropdown-list-item a i {
+  margin-right: 0.8rem;
+  font-size: 1.1rem;
+  width: 2.3rem;
+  height: 2.3rem;
+  background-color:#012b6b;
+  color: var(--white);
+  line-height: 2.3rem;
+  text-align: center;
+  margin-right: 1rem;
+  border-radius: 50%;
+  transition: margin-right 0.3s;
+}
+
+.profile-dropdown-list-item:hover {
+  padding-left: 1.5rem;
+  background-color: var(--secondary-light);
+}
+.section-hero {
+height: 40vh;
+  background-color: #f5d89b;
+  padding: 8.4rem 0 9.6rem 0;
+}
+.hero-text-box {
+  margin-left: 40px; /* Set the desired left margin */
+  max-width: 600px; /* Optional: control the width of the text box */
+  text-align: left; /* Align text to the left */
+}
+.hero-1 {
+  /* We'll not use px to define the length and will use rem. */
+  /* max-width: 1300px; */
+  max-width: 130rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0 1.2rem;
+  margin: 0 auto;
+  align-items: center;
+  gap: 0 4.6rem;
+
+ 
+}
+
+.heading-primary {
+  font-size: 2.2rem;
+  color: #333;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  line-height: 1.05;
+  margin-bottom: 3.6rem;
+}
+
+.hero-description {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  margin-bottom: 4.8rem;
+}
+
+.hero-img-box {
+  grid-column: 2/3;
+  grid-row: 1 / 3;
+}
+
+.hero-img {
+  width: 100%;
+}
+
+.btn:link,
+.btn:visited {
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+  border-radius: 9px;
+  /* margin-top: 4.8rem; */
+  padding: 1.6rem 3.2rem;
+  text-decoration: none;
+
+  transition: background-color 500ms;
+}
+
+.btn--fill:link,
+.btn--fill:visited {
+  background-color: #e67e22;
+  color: #fff;
+}
+
+.btn--outline:link,
+.btn--outline:visited {
+  color: #555;
+  background-color: #fff;
+}
+
+.btn--fill:hover,
+.btn--fill:active {
+  background-color: #cf711f;
+  text-decoration: underline;
+}
+
+.btn--outline:hover,
+.btn--outline:active {
+  background-color: #fdf2e9;
+  /* Now we'll not use border as in border the outlines are on the outside. Instead we'll use the outline or box-shadow property */
+  box-shadow: inset 0px 0px 0px 3px #fff;
+  text-decoration: underline;
+  /* outline: #fff solid 3px; */
+}
+
+/* We'll create a utility class that can be used for any element by simply adding a class. */
+.margin-right-btn {
+  margin-right: 2.4rem;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    
+}
+.section-card{
+    background: linear-gradient(135deg, #75a7ed, #02016f);
+    height: 60vh;
+    border-radius: 10px; 
+
+}
+
+
+.card {
+    max-width: 300px;
+    min-height: 250px;
+    background: linear-gradient(135deg, #02b875, #05c002); /* Added gradient background */
+    padding: 30px;
+    border-radius: 10px; /* Increased border radius for a softer look */
+    box-sizing: border-box;
+    color: #FFF;
+    margin: 20px;
+    box-shadow: rgb(50 50 93 / 25%) 0px 30px 60px -12px, rgb(0 0 0 / 30%) 0px 18px 36px -18px;
+    transition: transform 0.3s; /* Added transition for hover effect */
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+}
+
+.card:nth-child(2) {
+    background: linear-gradient(135deg, #ee4178, #ff8cb2); /* Added gradient */
+}
+
+.card:last-child {
+    background: linear-gradient(135deg, #ff9900, #ffa600); /* Added gradient */
+}
+
+.card-title {
+    margin-top: 0;
+    font-size: 20px; /* Increased font size */
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Added text shadow */
+}
+
+.card-content {
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    line-height: 1.5;
+}
+
+.card-btn {
+    all: unset;
+    display: block;
+    margin-left: auto;
+    border: 2px solid #FFF;
+    padding: 10px 15px;
+    border-radius: 25px;
+    font-size: 12px; /* Slightly increased font size */
+    font-weight: 600;
+    transition: all 0.5s;
+    cursor: pointer;
+    letter-spacing: 1.2px;
+    background: transparent; /* Set initial background to transparent */
+}
+
+.card-btn:hover {
+    color: #02b875;
+    background: rgba(255, 255, 255, 0.8); /* Light background on hover */
+}
+
+.card:nth-child(2) .card-btn:hover {
+    color: #4181ee;
+    background: rgba(255, 255, 255, 0.8); /* Light background on hover */
+}
+
+.card:last-child .card-btn:hover {
+    color: #6732b7;
+    background: rgba(255, 255, 255, 0.8); /* Light background on hover */
+}
+.cards-counsell{
+    text-align: center;
+    color: #fff; /* Change text color to white for contrast */
+    margin-bottom: 2rem;
+    font-size: 30px; /* Font size for the title */
+   /* Gradient background */
+    padding: 20px; /* Padding for spacing */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+    position: relative; /* Position for pseudo-elements */
+    overflow: hidden; /* Hide overflow for pseudo-elements */
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth transitions */
+}
+
+.student-data {
+    text-align: center; /* Center align content */
+    padding: 2rem; /* Padding for spacing */
+    background: linear-gradient(135deg, #75a7ed, #02016f);/* Gradient background */
+    color: #fff; /* White text for contrast */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+    margin: 2rem auto; /* Center the section */
+    max-width: 100%; /* Max width for the form */
+}
+
+
+h1 {
+    margin-bottom: 1.5rem; /* Spacing below title */
+    font-size: 2.5rem; /* Larger title size */
+}
+
+h1 {
+    margin-bottom: 1.5rem; /* Spacing below title */
+    font-size: 2.5rem; /* Larger title size */
+}
+
+.form-container {
+    background: #ffffff; /* White background for form */
+    padding: 2rem; /* Padding for form */
+    border-radius: 10px; /* Rounded corners for form */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Shadow for form */
+    display: flex; /* Flexbox for form layout */
+    flex-direction: column; /* Vertical layout */
+}
+
+.input-container {
+    display: flex; /* Flexbox for label and input */
+    justify-content: space-between; /* Space between label and input */
+    align-items: center; /* Center items vertically */
+    margin-bottom: 1.5rem; /* Equal spacing below input containers */
+}
+
+.label {
+    font-size: 1rem; /* Label font size */
+    color: #333; /* Dark color for labels */
+    flex-basis: 30%; /* Fixed width for labels */
+}
+
+.input, 
+textarea {
+    width: 70%; /* Input width adjusted */
+    padding: 0.75rem; /* Padding for inputs */
+    border: 2px solid #ccc; /* Border for inputs */
+    border-radius: 8px; /* Rounded corners */
+    font-size: 1rem; /* Font size for inputs */
+    transition: border-color 0.3s; /* Smooth transition for focus */
+}
+
+.input:focus, 
+textarea:focus {
+    border-color: #4181ee; /* Highlight border on focus */
+    outline: none; /* Remove default outline */
+}
+
+.button-container {
+    display: flex; /* Flexbox for button container */
+    justify-content: center; /* Center the button */
+    margin-top: 1.5rem; /* Spacing above button */
+}
+
+.button {
+    display: flex; /* Flexbox for button content */
+    align-items: center; /* Center items vertically */
+    justify-content: center; /* Center items horizontally */
+    background-color: #4181ee; /* Button background color */
+    color: #fff; /* Button text color */
+    padding: 0.75rem 1.5rem; /* Padding for button */
+    border: none; /* Remove border */
+    border-radius: 8px; /* Rounded corners */
+    font-size: 1rem; /* Button font size */
+    cursor: pointer; /* Pointer cursor */
+    transition: background 0.3s, transform 0.3s; /* Smooth transitions */
+    position: relative; /* Position for hover effect */
+}
+
+.button:hover {
+    background-color: #ff4081; /* Change background on hover */
+    transform: translateY(-2px); /* Lift effect on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow on hover */
+}
+
+.svg-wrapper-1 {
+    display: flex; /* Flex for SVG wrapper */
+    margin-right: 0.5rem; /* Spacing to text */
+}
+
+.svg-wrapper {
+    display: flex; /* Flex for SVG */
+}
+
+svg {
+    fill: currentColor; /* SVG color inherited from button */
+}
+
+span {
+    font-weight: 600; /* Bold text */
+    letter-spacing: 0.5px; /* Letter spacing */
+}
+
+.footer-container{
+	max-width: 1170px;
+	margin:auto;
+}
+.f-row{
+	display: flex;
+	flex-wrap: wrap;
+}
+.footer-col ul{
+	list-style: none;
+}
+.footer{
+	background-color: #001037;
+    padding: 70px 0;
+    line-height: 1.5;
+	font-family: 'Poppins', sans-serif;
+}
+.footer-col{
+   width: 25%;
+   padding: 0 15px;
+}
+.footer-col h4{
+	font-size: 18px;
+	color: #ffffff;
+	text-transform: capitalize;
+	margin-bottom: 35px;
+	font-weight: 500;
+	position: relative;
+}
+.footer-col h4::before{
+	content: '';
+	position: absolute;
+	left:0;
+	bottom: -10px;
+	background-color: #e91e63;
+	height: 2px;
+	box-sizing: border-box;
+	width: 50px;
+}
+.footer-col ul li:not(:last-child){
+	margin-bottom: 10px;
+}
+.footer-col ul li a{
+	font-size: 16px;
+	text-transform: capitalize;
+	color: #ffffff;
+	text-decoration: none;
+	font-weight: 300;
+	color: #bbbbbb;
+	display: block;
+	transition: all 0.3s ease;
+}
+.footer-col ul li a:hover{
+	color: #ffffff;
+	padding-left: 8px;
+}
+.footer-col .social-links a{
+	display: inline-block;
+	height: 40px;
+	width: 40px;
+	background-color: rgba(255,255,255,0.2);
+	margin:0 10px 10px 0;
+	text-align: center;
+	line-height: 40px;
+	border-radius: 50%;
+	color: #ffffff;
+	transition: all 0.5s ease;
+}
+.footer-col .social-links a:hover{
+	color: #24262b;
+	background-color: #ffffff;
+}
+.footer-bottom {
+  padding: 10px 20px; 
+  text-align: center;
+  font-size: 14px; 
+  color: white;
+  border-top: 0.5px solid #dddddd71;
+  background-color: #001037;
+
+ 
+}
+
+/* .footer-bottom-links {
+  list-style: none;
+  padding: 0; 
+  margin: 10px 0 0; 
+  display: inline-flex; 
+  gap: 15px; 
+*/
+@media(max-width: 767px){
+  .footer-col{
+    width: 50%;
+    margin-bottom: 30px;
+}
+}
+@media(max-width: 574px){
+  .footer-col{
+    width: 100%;
+}
+}
+
+    </style>
+</head>
+<body>
+    <section class="header-part">
+        <!-- Header -->
+        <div class="container">
+            <div class="logo">
+                <img src="images/nbkristlogo.jpg" alt="NBKRIST Logo">
+            </div>
+            <div class="details">
+                <h1>NBKR INSTITUTE OF SCIENCE & TECHNOLOGY</h1>
+                <h3>(AUTONOMOUS)</h3>
+                <p>Affiliated to JNTUA, Ananthapuramu, NAAC Accreditation with 'A' Grade, Accredited by NBA, "A" Grade Engineering College Recognized by AP Govt</p>
+            </div>
+            <div class="logo2">
+              
+            </div>
+        </div>
+        <div class="navbar">
+          <span class="toggle-btn" id="toggle-icon" onclick="toggleMenu()">&#9776;</span>
+      
+          <div id="nav-links">
+              <a href="new.html">Home</a>
+              <a href="/students">Students</a>
+              <a href="">Students Data</a>
+              <a href="student-data" id="contact-us-btn">Contact Us</a>
+            
+          </div>
+      
+          <div class="profile-dropdown">
+              <div onclick="toggleDropdown()" class="profile-dropdown-btn">
+                  <div class="profile-img">
+                      <i class="fa-regular fa-circle-user"></i>
+                  </div>
+                  <span>
+                      <p><span id="username"><%=user.username%></span></p>
+                      <i class="fa-solid fa-angle-down"></i>
+                  </span>
+              </div>
+      
+              <ul class="profile-dropdown-list">
+                  <li class="profile-dropdown-list-item">
+                      <a href="#">
+                          <i class="fa-regular fa-user"></i>
+                          Edit Profile
+                      </a>
+                  </li>
+                  <li class="profile-dropdown-list-item">
+                      <a href="#">
+                          <i class="fa-regular fa-envelope"></i>
+                          Inbox
+                      </a>
+                  </li>
+                  <li class="profile-dropdown-list-item">
+                      <a href="#">
+                          <i class="fa-regular fa-circle-question"></i>
+                          Help & Support
+                      </a>
+                  </li>
+                  <hr />
+                  <li class="profile-dropdown-list-item">
+                      <a href="#">
+                          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                          Log out
+                      </a>
+                  </li>
+              </ul>
+          </div>
+      </div>
+      
+        <!-- Header end -->
+    </section>
+   
+    
+    <section class="student-data">  
+        <h1>CONTACT US</h1>
+        <div class="form-container">
+            <form id="contactForm">
+                <div class="input-container">
+                    <label class="label" for="name">Name:</label>
+                    <input class="input" type="text" id="name" name="name" placeholder="Name" required>
+                </div>
+                <div class="input-container">
+                    <label class="label" for="email">Email:</label>
+                    <input class="input" type="email" id="email" name="email" placeholder="Email" required>
+                </div>
+                <div class="input-container">
+                    <label class="label" for="message">Message:</label>
+                    <textarea id="message" name="message" rows="4" placeholder="Message" required></textarea>
+                </div>
+                <div class="button-container">
+                    <button class="button" type="submit">
+                        <div class="svg-wrapper-1">
+                            <div class="svg-wrapper">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    width="24"
+                                    height="24"
+                                >
+                                    <path fill="none" d="M0 0h24v24H0z"></path>
+                                    <path
+                                        fill="currentColor"
+                                        d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
+                                    ></path>
+                                </svg>
+                            </div>
+                        </div>
+                        <span>Send</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+    
+    
+    <footer class="footer">
+        <div class="footer-container">
+          <div class="f-row">
+            <div class="footer-col">
+              <h4>About Us</h4>
+              <ul>
+                <li><a href="#">Our Mission</a></li>
+                <li><a href="#">Faculty & Student Counseling</a></li>
+                <li><a href="#">Attendance Management</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+              </ul>
+            </div>
+            
+            <div class="footer-col">
+              <h4>Our Services</h4>
+              <ul>
+                <li><a href="#">Student Counseling</a></li>
+                <li><a href="#">Faculty Assistance</a></li>
+                <li><a href="#">Attendance Tracking</a></li>
+                <li><a href="#">Data Reports</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h4>Connect with Us</h4>
+              <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+      
+       <div class="footer-bottom">
+        <p>© 2024 IEEE SB NBKRIST. All Rights Reserved.</p>
+        <!-- <ul class="footer-bottom-links">
+          <li><a href="#">Legal</a></li>
+          <li><a href="#">Credits</a></li>
+          <li><a href="#">Sponsor/Advertise</a></li>
+        </ul> -->
+      </div>
+
+    <!-- Hero Section -->
+    <script>
+      document.getElementById('contact-us-btn').addEventListener('click', function(e) {
+          e.preventDefault(); // Prevent the default anchor behavior
+          document.querySelector('.student-data').style.display = 'block'; // Show the "Contact Us" section
+          document.getElementById('contact-us-btn').scrollIntoView({behavior: 'smooth'}); // Scroll to the section smoothly
+      });
+  </script>
+  
+    <script>
+        function toggleMenu() {
+            var navLinks = document.getElementById("nav-links");
+            var toggleIcon = document.getElementById("toggle-icon");
+
+            // Toggle display of the nav links
+            if (navLinks.style.display === "flex") {
+                navLinks.style.display = "none";  // Hide the menu
+                toggleIcon.innerHTML = "&#9776;"; // Change to hamburger icon
+            } else {
+                navLinks.style.display = "flex";  // Show the menu
+                toggleIcon.innerHTML = "&times;"; // Change to close icon
+            }
+        }
+
+        // Function to reset the nav menu on window resize
+        window.addEventListener("resize", function() {
+            var navLinks = document.getElementById("nav-links");
+            var toggleIcon = document.getElementById("toggle-icon");
+
+            // Ensure nav-links are displayed properly when resizing to large screens
+            if (window.innerWidth >= 769) {
+                navLinks.style.display = "flex";
+                toggleIcon.innerHTML = "&#9776;"; // Reset to hamburger icon
+            } else {
+                navLinks.style.display = "none"; // Hide for small screens
+                toggleIcon.innerHTML = "&#9776;"; // Reset to hamburger icon
+            }
+        });
+        // carousel
+
+       
+  
+// profile
+
+function toggleDropdown() {
+        const dropdown = document.querySelector('.profile-dropdown-list');
+        dropdown.classList.toggle('show');
+    }
+
+    // Close dropdown if clicked outside of it
+    window.onclick = function(event) {
+        if (!event.target.matches('.profile-dropdown-btn') && !event.target.closest('.profile-dropdown-btn')) {
+            const dropdowns = document.querySelectorAll('.profile-dropdown-list');
+            dropdowns.forEach(dropdown => {
+                if (dropdown.classList.contains('show')) {
+                    dropdown.classList.remove('show');
+                }
+            });
+        }
+    }
+    
+      // Toggle for the profile dropdown
+      function toggle() {
+          let dropdown = document.querySelector('.profile-dropdown-list');
+          dropdown.classList.toggle('show');
+      }
+  
+      // Close dropdown if clicked outside
+      window.onclick = function(event) {
+          if (!event.target.matches('.profile-dropdown-btn, .profile-dropdown-btn *')) {
+              let dropdowns = document.querySelectorAll('.profile-dropdown-list');
+              dropdowns.forEach(dropdown => {
+                  if (dropdown.classList.contains('show')) {
+                      dropdown.classList.remove('show');
+                  }
+              });
+          }
+      }
+  </script>
+  
+</body>
+</html>
