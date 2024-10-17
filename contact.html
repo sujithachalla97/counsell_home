@@ -249,6 +249,11 @@
   --shadow: 0px 2px 8px 0px var(--secondary-light);
 }
 
+    .profile-dropdown {
+  position: relative;
+  width: fit-content;
+}
+
 .profile-dropdown-btn {
   display: flex;
   align-items: center;
@@ -299,7 +304,6 @@
   display: flex;
     gap: 9px;
 }
-
 
 .profile-dropdown-list hr {
   border: 0.5px solid var(--green);
@@ -447,12 +451,9 @@ height: 40vh;
     background: linear-gradient(135deg, #75a7ed, #02016f);
     height: 60vh;
     border-radius: 10px; 
-    margin-bottom: 20px;
 
 }
-.student-data {
-    display: none; /* Hide the section initially */
-}
+
 
 .card {
     max-width: 300px;
@@ -765,10 +766,10 @@ span {
           <span class="toggle-btn" id="toggle-icon" onclick="toggleMenu()">&#9776;</span>
       
           <div id="nav-links">
-              <a href="index.html">Home</a>
+              <a href="new.html">Home</a>
               <a href="/students">Students</a>
               <a href="">Students Data</a>
-              <a href="contact.html">Contact Us</a>
+              <a href="student-data" id="contact-us-btn">Contact Us</a>
             
           </div>
       
@@ -790,19 +791,7 @@ span {
                           Edit Profile
                       </a>
                   </li>
-                  <li class="profile-dropdown-list-item">
-                      <a href="#">
-                          <i class="fa-regular fa-envelope"></i>
-                          Inbox
-                      </a>
-                  </li>
-                  <li class="profile-dropdown-list-item">
-                      <a href="#">
-                          <i class="fa-regular fa-circle-question"></i>
-                          Help & Support
-                      </a>
-                  </li>
-                  <hr />
+                 
                   <li class="profile-dropdown-list-item">
                       <a href="#">
                           <i class="fa-solid fa-arrow-right-from-bracket"></i>
@@ -816,52 +805,7 @@ span {
         <!-- Header end -->
     </section>
    
-    <section class="section-hero">
-        <!-- 1.  Now we need to make our hero section display grid and need to center the content in the page.
-      
-             2. To acheive that we need to create a div container inside of our section that contains all the text and img -->
-  
-             <div class="hero-1">
-                <div class="hero-text-box">
-                  <h1 class="heading-primary">
-                    Streamline Your Counseling Experience
-                  </h1>
-                  <p class="hero-description">
-                    A dedicated platform for students and faculty to efficiently manage attendance reports and fee dues, ensuring academic success.
-                  </p>
-                  <a href="#" class="btn btn--fill margin-right-btn">Get Started</a>
-                  <a href="#" class="btn btn--outline margin-right-btn">Learn More&darr;</a>
-                </div>
-                <div class="hero-img-box">
-                  <img
-                    src="images/nbkrcol.jpg" 
-                    alt="Counselor assisting students with attendance and fee information"
-                    class="hero-img"
-                  />
-                </div>
-              </div>
-              
-      </section>
-    <section class="section-card">
-        <h1 class="cards-counsell">COUNSELLING KIT</h1>
-<div class="wrapper">
-<div class="card">
-	<h3 class="card-title">GET REPORT</h3>
-		<p class="card-content">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
-		<button class="card-btn">GET</button>
-	</div>
-	<div class="card">
-		<h3 class="card-title">ADD ATTENDANCE REPORT</h3>
-		<p class="card-content">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
-		<button class="card-btn">ADD </button>
-	</div>
-	<div class="card">
-		<h3 class="card-title">GET ATTENDANCE REPORT</h3>
-		<p class="card-content">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
-		<button class="card-btn">GET</button>
-	</div>
-</div>
-    </section>
+    
     <section class="student-data">  
         <h1>CONTACT US</h1>
         <div class="form-container">
@@ -902,7 +846,7 @@ span {
             </form>
         </div>
     </section>
-    <section class="student-data"></section>
+    
     
     <footer class="footer">
         <div class="footer-container">
